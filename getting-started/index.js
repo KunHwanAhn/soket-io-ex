@@ -15,6 +15,15 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
+
+  socket.on('chat message', (msg) => {
+    console.log('message: ' + msg);
+
+    // NOTE: 메시지를 보낸 소켓을 제외하고 브로드 캐스팅하는 방법
+    // socket.broadcast.emit('hi');
+
+    io.emit('chat message', msg);
+  });
 })
 
 server.listen(3000, () => {
